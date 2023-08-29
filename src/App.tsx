@@ -10,21 +10,42 @@ function App() {
 
   const [todos, setTodos] = useState(Array<Todo>)
 
-  useEffect(() => {
+  const getTodos = () => {
     fetch("http://localhost:3000/todos")
       .then(res => res.json())
       .then(data => {
         console.log(data)
         setTodos(data)
       })
+  }
+
+  useEffect(() => {
+    getTodos()
   }, [])
 
   const updateTodos = (getItem: string) => {
-    setTodos([...todos, { todo: getItem, id: todos.length + 1 }])
+    fetch("http://localhost:3000/todos", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({ todo: getItem, id: Date.now() })
+    })
+      .then(res => res.json())
+      .then(() => getTodos())
   }
 
   const removeTodo = (getId: number) => {
-    setTodos(todos.filter(item => item.id !== getId));
+    // setTodos(todos.filter(item => item.id !== getId));
+
+    fetch(`http://localhost:3000/todos/${getId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(() => console.log(getTodos()))
   }
 
   return (

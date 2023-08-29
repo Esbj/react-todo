@@ -1,6 +1,8 @@
 {
   "todos": [
-    { "todo": "Lägg till nya items", "id": 1 },
-    { "todo": "Ta bort items", "id": 2 }
+    {
+      "todo": "Läs på om hooks",
+      "id": 1693308445408
+    }
   ]
 }

@@ -10,7 +10,6 @@ function AddTodoForm({ updateTodos }: Props) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("formulär sparat");
         updateTodos(inputNewTodo);
         setInputNewTodo("");
     }
